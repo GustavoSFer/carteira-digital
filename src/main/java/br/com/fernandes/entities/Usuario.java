@@ -1,18 +1,30 @@
 package br.com.fernandes.entities;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
+@Table(name = "usuario")
 public class Usuario implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @JsonProperty("nome")
+    @NotNull(message = "O atributo nome não pode ser nulo")
     private String nome;
+    @JsonProperty("cpf")
+    @NotNull(message = "O atributo cpf não pode ser nulo")
     private String cpf;
+    @JsonProperty("email")
+    @NotNull(message = "O atributo email não pode ser nulo")
     private String email;
 
     @ManyToMany
