@@ -7,7 +7,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -31,13 +33,8 @@ public class Usuario implements Serializable {
     @NotNull(message = "O atributo email não pode ser nulo")
     private String email;
 
-    @ManyToMany
-    @JoinTable(
-            name = "usuario_conta",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "conta_id")
-    )
-    private Set<Conta> contas;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Conta> contas;
 
     public Usuario() {}
 
@@ -46,6 +43,6 @@ public class Usuario implements Serializable {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
-        this.contas = new HashSet<>();
+        this.contas = new ArrayList<>();
     }
 }
