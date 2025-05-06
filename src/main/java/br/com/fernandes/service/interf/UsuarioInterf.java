@@ -1,6 +1,9 @@
 package br.com.fernandes.service.interf;
 
-public interface Usuario {
+import br.com.fernandes.entities.Usuario;
+
+public interface UsuarioInterf {
 
     Usuario criarUsuario(Usuario usuario);
+
 }

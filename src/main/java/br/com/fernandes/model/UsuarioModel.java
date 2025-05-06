@@ -3,7 +3,9 @@ package br.com.fernandes.model;
 import br.com.fernandes.entities.Usuario;
 import br.com.fernandes.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UsuarioModel {
 
     @Autowired

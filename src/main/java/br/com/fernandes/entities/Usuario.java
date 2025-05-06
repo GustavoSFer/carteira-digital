@@ -23,26 +23,22 @@ public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @JsonProperty("nome")
-    @NotNull(message = "O atributo nome não pode ser nulo")
     private String nome;
-    @JsonProperty("cpf")
-    @NotNull(message = "O atributo cpf não pode ser nulo")
     private String cpf;
-    @JsonProperty("email")
-    @NotNull(message = "O atributo email não pode ser nulo")
     private String email;
+    private String senha;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Conta> contas;
 
     public Usuario() {}
 
-    public Usuario(Long id, String nome, String cpf, String email) {
+    public Usuario(Long id, String nome, String cpf, String email, String senha) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
+        this.senha = senha;
         this.contas = new ArrayList<>();
     }
 }
