@@ -41,6 +41,10 @@ public class Conta implements Serializable {
     @OneToMany(mappedBy = "contaDestino")
     private List<Transacao> transacoesDestino;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
+
     public Conta() {}
 
     public Conta(String dac, String contaNumero, String contaAgencia) {

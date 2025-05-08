@@ -7,7 +7,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,31 +23,22 @@ public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @JsonProperty("nome")
-    @NotNull(message = "O atributo nome não pode ser nulo")
     private String nome;
-    @JsonProperty("cpf")
-    @NotNull(message = "O atributo cpf não pode ser nulo")
     private String cpf;
-    @JsonProperty("email")
-    @NotNull(message = "O atributo email não pode ser nulo")
     private String email;
+    private String senha;
 
-    @ManyToMany
-    @JoinTable(
-            name = "usuario_conta",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "conta_id")
-    )
-    private Set<Conta> contas;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Conta> contas;
 
     public Usuario() {}
 
-    public Usuario(Long id, String nome, String cpf, String email) {
+    public Usuario(Long id, String nome, String cpf, String email, String senha) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
-        this.contas = new HashSet<>();
+        this.senha = senha;
+        this.contas = new ArrayList<>();
     }
 }
