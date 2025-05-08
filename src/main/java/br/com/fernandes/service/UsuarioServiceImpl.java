@@ -6,6 +6,8 @@ import br.com.fernandes.service.interf.UsuarioInterf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsuarioServiceImpl implements UsuarioInterf {
 
@@ -15,5 +17,10 @@ public class UsuarioServiceImpl implements UsuarioInterf {
     @Override
     public Usuario criarUsuario(Usuario usuario) {
         return usuarioModel.criarUsuario(usuario);
+    }
+
+    @Override
+    public List<Usuario> usuarios() {
+        return usuarioModel.usuarios();
     }
 }

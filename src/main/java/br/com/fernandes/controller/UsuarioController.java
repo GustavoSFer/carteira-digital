@@ -7,17 +7,18 @@ import br.com.fernandes.entities.Usuario;
 import br.com.fernandes.service.UsuarioServiceImpl;
 import br.com.fernandes.util.DtoMapper;
 import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @RestController
-@RequestMapping(value = "/usuario")
+@RequestMapping(value = "/usuarios")
 public class UsuarioController {
 
 
@@ -32,10 +33,23 @@ public class UsuarioController {
 
         ApiResponse<UsuarioDto> response = new ApiResponse<>(
                 usuarioDto,
-                "/usuario",
+                "/usuarios",
                 Collections.emptyList()
         );
 
+        return ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping
+    public ResponseEntity<ApiResponse<List<UsuarioDto>>> usuarios() {
+        List<Usuario> usuarios = usuarioService.usuarios();
+        List<UsuarioDto> usuariosDto = usuarios.stream().map(DtoMapper::usuarioToDto).toList();
+
+        ApiResponse response = new ApiResponse(
+                usuariosDto,
+                "usuarios",
+                Collections.emptyList()
+        );
         return ResponseEntity.ok().body(response);
     }
 }
