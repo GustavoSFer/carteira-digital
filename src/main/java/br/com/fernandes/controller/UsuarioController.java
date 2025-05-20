@@ -26,30 +26,27 @@ public class UsuarioController {
     private UsuarioServiceImpl usuarioService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<UsuarioDto>> criarUsuario(@Valid @RequestBody UsuarioCreateDTO usuario) {
+    public ApiResponse<UsuarioDto> criarUsuario(@Valid @RequestBody UsuarioCreateDTO usuario) {
 
         Usuario usuarioCriado = usuarioService.criarUsuario(DtoMapper.usuarioCreateDTOToUsuario(usuario));
         UsuarioDto usuarioDto = DtoMapper.usuarioToDto(usuarioCriado);
 
-        ApiResponse<UsuarioDto> response = new ApiResponse<>(
+        return new ApiResponse<>(
                 usuarioDto,
                 "/usuarios",
                 Collections.emptyList()
         );
-
-        return ResponseEntity.ok().body(response);
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<UsuarioDto>>> usuarios() {
+    public ApiResponse<List<UsuarioDto>> usuarios() {
         List<Usuario> usuarios = usuarioService.usuarios();
         List<UsuarioDto> usuariosDto = usuarios.stream().map(DtoMapper::usuarioToDto).toList();
 
-        ApiResponse response = new ApiResponse(
+        return new ApiResponse(
                 usuariosDto,
                 "usuarios",
                 Collections.emptyList()
         );
-        return ResponseEntity.ok().body(response);
     }
 }
