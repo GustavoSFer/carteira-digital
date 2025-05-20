@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -46,6 +47,17 @@ public class UsuarioController {
         return new ApiResponse(
                 usuariosDto,
                 "usuarios",
+                Collections.emptyList()
+        );
+    }
+
+    @GetMapping("/{id}")
+    public ApiResponse<Usuario> findById(@PathVariable Long id) {
+        Optional<Usuario> usuario = usuarioService.getUsuario(id);
+
+        return new ApiResponse(
+                usuario,
+                "usuarios/{id}",
                 Collections.emptyList()
         );
     }
