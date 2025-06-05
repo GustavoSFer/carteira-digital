@@ -1,7 +1,6 @@
 package br.com.fernandes.service;
 
 import br.com.fernandes.entities.Conta;
-import br.com.fernandes.entities.Usuario;
 import br.com.fernandes.exception.ContaNotFound;
 import br.com.fernandes.model.ContaModel;
 import br.com.fernandes.service.interf.ContaInterf;
@@ -16,8 +15,8 @@ public class ContaServiceImpl implements ContaInterf {
     ContaModel contaModel;
 
     @Override
-    public Conta createConta(Conta conta, Usuario usuario) {
-        return contaModel.criarConta(conta, usuario);
+    public Conta createConta(Conta conta) {
+        return contaModel.criarConta(conta);
     }
 
     @Override

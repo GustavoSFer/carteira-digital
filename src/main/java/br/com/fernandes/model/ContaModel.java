@@ -13,8 +13,7 @@ public class ContaModel {
     @Autowired
     ContaRepository contaRepository;
 
-    public Conta criarConta(Conta conta, Usuario usuario) {
-        conta.setUsuario(usuario);
+    public Conta criarConta(Conta conta) {
         return contaRepository.save(conta);
     }
 

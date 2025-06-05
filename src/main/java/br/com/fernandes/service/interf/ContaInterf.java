@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ContaInterf {
 
-    Conta createConta(Conta conta, Usuario usuario);
+    Conta createConta(Conta conta);
 
     List<Conta> getConta();
 
