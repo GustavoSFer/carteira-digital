@@ -27,8 +27,9 @@ public class UsuarioServiceImpl implements UsuarioInterf {
     }
 
     @Override
-    public Optional<Usuario> getUsuario(long id) {
+    public Usuario getUsuario(long id) {
         Optional<Usuario> usuario = usuarioModel.findById(id);
-        return Optional.ofNullable(usuario.orElseThrow(() -> new UserNotFound("Usuário não encontrado")));
+
+        return usuario.orElseThrow(() -> new UserNotFound("Usuário não encontrado"));
     }
 }

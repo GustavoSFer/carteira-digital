@@ -11,6 +11,6 @@ public interface UsuarioInterf {
 
     List<Usuario> usuarios();
 
-    Optional<Usuario> getUsuario(long id);
+    Usuario getUsuario(long id);
 
 }

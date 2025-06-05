@@ -53,7 +53,7 @@ public class UsuarioController {
 
     @GetMapping("/{id}")
     public ApiResponse<Usuario> findById(@PathVariable Long id) {
-        Optional<Usuario> usuario = usuarioService.getUsuario(id);
+        Usuario usuario = usuarioService.getUsuario(id);
 
         return new ApiResponse(
                 usuario,
