@@ -1,5 +1,6 @@
 package br.com.fernandes.controller.exception;
 
+import br.com.fernandes.exception.UserNotFound;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,17 @@ public class GlobalExceptionHandler {
         Map<String, Object> corpoResposta = new HashMap<>();
         corpoResposta.put("data", new HashMap<>());
         corpoResposta.put("erros", erros);
+        corpoResposta.put("paths", request.getRequestURI());
+
+        return new ResponseEntity<>(corpoResposta, HttpStatus.BAD_REQUEST);
+    };
+
+    @ExceptionHandler(UserNotFound.class)
+    public ResponseEntity<Object> userNotFount(UserNotFound e, HttpServletRequest request) {
+
+        Map<String, Object> corpoResposta = new HashMap<>();
+        corpoResposta.put("data", new HashMap<>());
+        corpoResposta.put("erros", e.getMessage());
         corpoResposta.put("paths", request.getRequestURI());
 
         return new ResponseEntity<>(corpoResposta, HttpStatus.BAD_REQUEST);
